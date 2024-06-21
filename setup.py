@@ -2,7 +2,7 @@
 
 from distutils.core import setup, Extension
 
-module = Extension('simulate', sources = ['old_python_wrappers.c'])
+module = Extension('simulate', sources = ['python_wrappers.c'])
 
 setup(
     name = 'simulate',
