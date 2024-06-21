@@ -5,6 +5,17 @@
 #include <time.h>
 #include "simulate.c"
 
+/**
+ * Prints the contents of the board as a 2D boolean array.
+ *
+ * @param board A pointer to the board.
+ * @param m The number of rows in the board.
+ * @param n The number of columns in the board.
+ *
+ * @return void
+ *
+ * @throws None
+ */
 void print_board(bool** board, int m, int n) {
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
@@ -14,6 +25,17 @@ void print_board(bool** board, int m, int n) {
     }
 }
 
+
+/**
+ * Runs the main function for testing the game of life simulation.
+ *
+ * @param argc the number of command-line arguments
+ * @param argv an array of strings containing the command-line arguments
+ *
+ * @return 0 if the function completes successfully
+ *
+ * @throws None
+ */
 int main(int argc, char** argv) {
     int m = 10;
     int n = 10;
