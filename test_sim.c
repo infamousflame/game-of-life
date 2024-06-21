@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     char* user_input;
     bool** new_board;
 
-    for(int i = 0; ; i++) {
+    for (int i = 0; i < 31; i++) {
         _sleep(1000);
         printf("Iteration %d:\n", i);
         new_board = iterate_once(board, m, n);
@@ -44,4 +44,6 @@ int main(int argc, char** argv) {
     }
     
     free_board(board, m, n);
+
+    return 0;
 }

@@ -1,6 +1,5 @@
 """This should be a Python equivalent of test_sim.c."""
 
-from itertools import count
 from time import sleep
 
 from simulate import iterate_once
@@ -39,7 +38,7 @@ def main() -> None:
     board[8][7] = True
     print_board(board)
 
-    for i in count():
+    for i in range(31):
         sleep(1)
         print(f'Iteration {i}:')
         iterate_once(board)
