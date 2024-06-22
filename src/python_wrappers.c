@@ -23,9 +23,6 @@ static PyObject* Board_new(PyTypeObject* type, PyObject* args, PyObject* kwargs)
         PyErr_SetString(PyExc_MemoryError, "Failed to allocate Board");
         return NULL;
     }
-    self->board = NULL;
-    self->m = 0;
-    self->n = 0;
     return (PyObject*) self;
 }
 
@@ -71,6 +68,35 @@ static PyObject* Board_iterate_once(Board* self, PyObject* Py_UNUSED(ignored)) {
     }
     free_board(self->board, self->m, self->n);
     self->board = new_board;
+    Py_RETURN_NONE;
+}
+
+
+/**
+ * Resizes the board of the given Board object.
+ *
+ * @param self A pointer to the Board object.
+ * @param args A tuple containing two integers: the new number of rows and columns.
+ *
+ * @return Py_RETURN_NONE if the resizing is successful.
+ *         NULL if the arguments cannot be parsed.
+ *
+ * @throws PyExc_MemoryError if memory allocation fails.
+ */
+static PyObject* Board_resize(Board* self, PyObject* args) {
+    int m, n;
+    if (!PyArg_ParseTuple(args, "ii", &m, &n)) {
+        return NULL;
+    }
+    bool** new_board = reallocate_board(self->board, self->m, self->n, m, n);
+    if (new_board == NULL) {
+        PyErr_SetString(PyExc_MemoryError, "Failed to allocate new board");
+        return NULL;
+    }
+    free_board(self->board, self->m, self->n);
+    self->board = new_board;
+    self->m = m;
+    self->n = n;
     Py_RETURN_NONE;
 }
 
@@ -158,6 +184,12 @@ static PyMethodDef Board_methods[] = {
         (PyCFunction) Board_iterate_once,
         METH_NOARGS,
         "Executes a single iteration of the Game of Life on a given board represented as a list of lists of booleans."
+    },
+    {
+        "resize",
+        (PyCFunction) Board_resize,
+        METH_VARARGS,
+        "Resizes the board to the given dimensions."
     },
     {
         "get_cell",

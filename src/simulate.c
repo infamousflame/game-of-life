@@ -36,6 +36,39 @@ bool** allocate_board(int m, int n) {
 
 
 /**
+ * Reallocates a board of size m x n to a board of size new_m x new_n.
+ * Values in the old board are copied to the new board.
+ * This does NOT free the old board's pointers.
+ *
+ * @param board A pointer to a 2D array of booleans.
+ * @param m The number of rows in the board.
+ * @param n The number of columns in the board.
+ * @param new_m The new number of rows in the new board.
+ * @param new_n The new number of columns in the new board.
+ * @return A pointer to the newly allocated board.
+ */
+bool** reallocate_board(bool** board, int m, int n, int new_m, int new_n) {
+    bool** new_board = allocate_board(new_m, new_n);
+    if (new_board == NULL) {
+        return NULL;
+    }
+    for (int i = 0; i < new_m; i++) {
+        if (new_board[i] == NULL) {
+            continue;
+        }
+        for (int j = 0; j < new_n; j++) {
+            if (i < m && j < n) {
+                new_board[i][j] = board[i][j];
+            } else {
+                new_board[i][j] = false;
+            }
+        }
+    }
+    return new_board;
+}
+
+
+/**
  * Frees all pointers in a board.
  *
  * @param board A pointer to a 2D array of booleans.
