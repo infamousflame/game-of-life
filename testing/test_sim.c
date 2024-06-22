@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
-#include "../src/simulate.c"
+#include "../src/modules/simulate/simulate.c"
 
 /**
  * Prints the contents of the board as a 2D boolean array.
