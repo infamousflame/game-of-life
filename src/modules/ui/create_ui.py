@@ -1,5 +1,7 @@
 """responsible for creating the user interface."""
 
+__all__ = ['MainUI']
+
 from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
