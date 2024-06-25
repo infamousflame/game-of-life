@@ -38,5 +38,8 @@ def main() -> None:
     board.resize(10, 10)
     print_board(board)
 
+    board.resize(6, 12)
+    print_board(board)
+
 if __name__ == '__main__':
     main()
