@@ -17,7 +17,7 @@ BoxLayout:
             step: 1
 
         Label:
-            text: str(row_slider.value)
+            text: f'Rows: {row_slider.value}'
 
         Slider:
             id: col_slider
@@ -26,7 +26,7 @@ BoxLayout:
             step: 1
 
         Label:
-            text: str(col_slider.value)
+            text: f'Columns: {col_slider.value}'
 
         Button:
             text: 'Resize'
