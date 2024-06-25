@@ -2,7 +2,7 @@
 
 from setuptools import setup, Extension
 
-module = Extension('simulate', sources = ['./src/python_wrappers.c'])
+module = Extension('simulate', sources = ['./src/modules/simulate/python_wrappers.c'])
 
 setup(
     name = 'simulate',
