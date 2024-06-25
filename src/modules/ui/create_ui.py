@@ -12,7 +12,7 @@ class RootLayout(BoxLayout):
     """The root layout."""
 
 
-class ConwaysGameOfLife(App):
+class MainUI(App):
     """The app class."""
 
     def build(self) -> RootLayout:
