@@ -109,10 +109,15 @@ static PyObject* Board_resize(Board* self, PyObject* args) {
  * @return A PyBoolObject representing the value of the cell.
  *
  * @throws PyExc_TypeError if the arguments cannot be parsed.
+ * @throws PyExc_IndexError if the row or column index is out of bounds.
  */
 static PyObject* Board_get_cell(Board* self, PyObject* args) {
     int i, j;
     if (!PyArg_ParseTuple(args, "ii", &i, &j)) {
+        return NULL;
+    }
+    if (i < 0 || i >= self->m || j < 0 || j >= self->n) {
+        PyErr_SetString(PyExc_IndexError, "Index out of bounds");
         return NULL;
     }
     return PyBool_FromLong(self->board[i][j]);
@@ -125,11 +130,20 @@ static PyObject* Board_get_cell(Board* self, PyObject* args) {
  * @param args A tuple containing three integers: the row index, column index, and the value to set.
  * @return Py_RETURN_NONE if the cell is successfully set, or NULL if the arguments cannot be parsed.
  *
- * @throws None
+ * @throws PyExc_IndexError if the row or column index is out of bounds.
+ * @throws PyExc_TypeError if the value is not 0 or 1.
  */
 static PyObject* Board_set_cell(Board* self, PyObject* args) {
     int i, j, value;
     if (!PyArg_ParseTuple(args, "iii", &i, &j, &value)) {
+        return NULL;
+    }
+    if (i < 0 || i >= self->m || j < 0 || j >= self->n) {
+        PyErr_SetString(PyExc_IndexError, "Index out of bounds");
+        return NULL;
+    }
+    if (value != 0 && value != 1) {
+        PyErr_SetString(PyExc_TypeError, "Value must be 0 or 1");
         return NULL;
     }
     self->board[i][j] = (bool) value;
