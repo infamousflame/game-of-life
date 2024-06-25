@@ -6,6 +6,8 @@ from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
 
+from modules.sim.run import board
+
 with open('./assets/ui/root_layout.kv', 'rt') as f:
     Builder.load_string(f.read())
 
