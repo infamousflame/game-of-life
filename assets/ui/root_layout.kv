@@ -1,0 +1,14 @@
+BoxLayout:
+    orientation: 'vertical'
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 40
+
+        Button:
+            text: 'Step'
+            on_release: app.iterate_once()
+
+    BoardWidget:
+        id: board_widget
