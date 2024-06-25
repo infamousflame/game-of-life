@@ -8,7 +8,7 @@ BoxLayout:
 
         Button:
             text: 'Step'
-            on_release: app.iterate_once()
+            on_release: board_widget.iterate_once()
 
         Slider:
             id: row_slider
@@ -30,7 +30,7 @@ BoxLayout:
 
         Button:
             text: 'Resize'
-            on_release: app.resize_board()
+            on_release: board_widget.resize(row_slider.value, col_slider.value)
 
     BoardWidget:
         id: board_widget
