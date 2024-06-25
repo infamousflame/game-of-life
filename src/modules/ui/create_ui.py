@@ -32,12 +32,12 @@ class Cell(Button):
 class BoardWidget(GridLayout):
     """The board widget."""
 
-    def __init__(self, rows: int, cols: int, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize the board widget."""
         super().__init__(**kwargs)
-        self.cols = cols
-        for i in range(rows):
-            for j in range(cols):
+        self.cols = BOARD_SIZE[1]
+        for i in range(BOARD_SIZE[0]):
+            for j in range(BOARD_SIZE[1]):
                 self.add_widget(Cell((i, j)))
 
     def resize(self, rows: int, cols: int) -> None:
@@ -65,8 +65,7 @@ class MainUI(App):
         """Build the user interface."""
         with open('./assets/ui/root_layout.kv', 'rt') as f:
             self.root =  Builder.load_string(f.read())
-        self.board_widget = BoardWidget(*BOARD_SIZE)
-        self.root.add_widget(self.board_widget)
+        self.board_widget = self.root.ids.board_widget
         self.row_slider = self.root.ids.row_slider
         self.col_slider = self.root.ids.col_slider
         return self.root
