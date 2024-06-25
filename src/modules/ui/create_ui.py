@@ -2,13 +2,13 @@
 
 from kivy.app import App
 from kivy.lang.builder import Builder
-from kivy.uix.layout import Layout
+from kivy.uix.boxlayout import BoxLayout
 
 with open('./assets/ui/root_layout.kv', 'rt') as f:
     Builder.load_string(f.read())
 
 
-class RootLayout(Layout):
+class RootLayout(BoxLayout):
     """The root layout."""
 
 
