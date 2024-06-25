@@ -7,7 +7,7 @@ from kivy.lang.builder import Builder
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 
-from modules.sim.run import board, BOARD_SIZE
+from modules.sim_runner.run import board, BOARD_SIZE
 
 
 class Cell(Button):
