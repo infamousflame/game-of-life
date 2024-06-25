@@ -32,27 +32,51 @@ class Cell(Button):
 class BoardWidget(GridLayout):
     """The board widget."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, rows: int, cols: int, **kwargs):
         """Initialize the board widget."""
         super().__init__(**kwargs)
-        self.cols = BOARD_SIZE[1]
-        self.rows = BOARD_SIZE[0]
-        for i in range(BOARD_SIZE[0]):
-            for j in range(BOARD_SIZE[1]):
+        self.cols = cols
+        for i in range(rows):
+            for j in range(cols):
+                self.add_widget(Cell((i, j)))
+
+    def resize(self, rows: int, cols: int) -> None:
+        """Resize the board."""
+        self.clear_widgets()
+        self.cols = cols
+        for i in range(rows):
+            for j in range(cols):
                 self.add_widget(Cell((i, j)))
 
 
 class MainUI(App):
     """The app class."""
 
+    def __init__(self, **kwargs) -> None:
+        """Initialize the app."""
+        super().__init__(**kwargs)
+        self.root = None
+        self.board_widget = None
+        self.row_slider = None
+        self.col_slider = None
+        self.title = 'Game of Life'
+
     def build(self):
         """Build the user interface."""
         with open('./assets/ui/root_layout.kv', 'rt') as f:
             self.root =  Builder.load_string(f.read())
-        self.board_widget = self.root.ids.board_widget
+        self.board_widget = BoardWidget(*BOARD_SIZE)
+        self.root.add_widget(self.board_widget)
+        self.row_slider = self.root.ids.row_slider
+        self.col_slider = self.root.ids.col_slider
         return self.root
 
-    def iterate_once(self):
+    def iterate_once(self) -> None:
         board.iterate_once()
         for child in self.board_widget.children:
             child.set_bg_color()
+
+    def resize_board(self) -> None:
+        size: tuple[int, int] = self.row_slider.value, self.col_slider.value
+        board.resize(*size)
+        self.board_widget.resize(*size)

@@ -10,5 +10,24 @@ BoxLayout:
             text: 'Step'
             on_release: app.iterate_once()
 
-    BoardWidget:
-        id: board_widget
+        Slider:
+            id: row_slider
+            min: 1
+            max: 30
+            step: 1
+
+        Label:
+            text: str(row_slider.value)
+
+        Slider:
+            id: col_slider
+            min: 1
+            max: 30
+            step: 1
+
+        Label:
+            text: str(col_slider.value)
+
+        Button:
+            text: 'Resize'
+            on_release: app.resize_board()
