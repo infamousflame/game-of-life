@@ -10,27 +10,44 @@ BoxLayout:
             text: 'Step'
             on_release: board_widget.iterate_once()
 
-        Slider:
-            id: row_slider
-            min: 1
-            max: 30
-            step: 1
-
-        Label:
-            text: f'Rows: {row_slider.value}'
-
-        Slider:
-            id: col_slider
-            min: 1
-            max: 30
-            step: 1
-
-        Label:
-            text: f'Columns: {col_slider.value}'
-
         Button:
-            text: 'Resize'
-            on_release: board_widget.resize(row_slider.value, col_slider.value)
+            text: 'Settings'
+            on_release: app.open_settings_menu()
 
     BoardWidget:
         id: board_widget
+
+<SettingsMenu>:
+    title: 'Game Settings'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Slider:
+                id: row_slider
+                min: 1
+                max: 30
+                step: 1
+
+            Label:
+                text: f'Rows: {row_slider.value}'
+
+            Slider:
+                id: col_slider
+                min: 1
+                max: 30
+                step: 1
+
+            Label:
+                text: f'Columns: {col_slider.value}'
+
+            Button:
+                text: 'Resize'
+                on_release: app.board_widget.resize(row_slider.value, col_slider.value)
+
+        Button:
+            text: 'Close Settings'
+            on_release: root.dismiss()

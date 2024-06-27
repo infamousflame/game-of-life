@@ -6,8 +6,13 @@ from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.popup import Popup
 
 from modules.sim_runner.run import board, BOARD_SIZE
+
+
+class SettingsMenu(Popup):
+    """The settings pane."""
 
 
 class Cell(Button):
@@ -71,3 +76,8 @@ class MainUI(App):
             self.root =  Builder.load_string(f.read())
         self.board_widget = self.root.ids.board_widget
         return self.root
+
+    def open_settings_menu(self) -> None:
+        """Open the settings window."""
+        SettingsMenu().open()
+
