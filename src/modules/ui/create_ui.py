@@ -78,6 +78,6 @@ class MainUI(App):
         return self.root
 
     def open_settings_menu(self) -> None:
-        """Open the settings window."""
+        """Open the settings menu."""
         SettingsMenu().open()
 
