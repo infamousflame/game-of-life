@@ -28,7 +28,7 @@ class Cell(Button):
         """Set the background color according to the cell's state."""
         self.background_color = (0, board.get_cell(*self.coords), 0)
 
-    def on_press(self) -> None:
+    def on_release(self) -> None:
         """Handle the press event."""
         board.set_cell(*self.coords, not board.get_cell(*self.coords))
         self.set_bg_color()
