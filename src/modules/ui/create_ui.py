@@ -30,7 +30,7 @@ class Cell(Button):
 
     def on_release(self) -> None:
         """Handle the press event."""
-        board.set_cell(*self.coords, not board.get_cell(*self.coords))
+        board.toggle_cell(*self.coords)
         self.set_bg_color()
 
 

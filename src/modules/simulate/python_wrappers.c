@@ -151,6 +151,28 @@ static PyObject* Board_set_cell(Board* self, PyObject* args) {
 }
 
 /**
+ * Toggles the value of a cell in the game board.
+ *
+ * @param self A pointer to the Board object.
+ * @param args A tuple containing two integers: the row index and column index.
+ * @return Py_RETURN_NONE if the cell is successfully toggled, or NULL if the arguments cannot be parsed or the index is out of bounds.
+ *
+ * @throws PyExc_IndexError if the row or column index is out of bounds.
+ */
+static PyObject* Board_toggle_cell(Board* self, PyObject* args) {
+    int i, j;
+    if (!PyArg_ParseTuple(args, "ii", &i, &j)) {
+        return NULL;
+    }
+    if (i < 0 || i >= self->m || j < 0 || j >= self->n) {
+        PyErr_SetString(PyExc_IndexError, "Index out of bounds");
+        return NULL;
+    }
+    self->board[i][j] = !self->board[i][j];
+    Py_RETURN_NONE;
+}
+
+/**
  * Retrieves the value of the 'm' attribute from the given Board object and returns it as a Python long integer.
  *
  * @param self A pointer to the Board object.
@@ -216,6 +238,12 @@ static PyMethodDef Board_methods[] = {
         (PyCFunction) Board_set_cell,
         METH_VARARGS,
         "Sets the value of a cell in the board."
+    },
+    {
+        "toggle_cell",
+        (PyCFunction) Board_toggle_cell,
+        METH_VARARGS,
+        "Toggles the value of a cell in the board."
     },
     {
         "get_m",
