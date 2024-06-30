@@ -11,6 +11,11 @@ BoxLayout:
             on_release: board_widget.iterate_once()
 
         Button:
+            text: 'Play'
+            id: play_pause_button
+            on_release: app.play_pause()
+
+        Button:
             text: 'Settings'
             on_release: app.open_settings_menu()
 
@@ -27,26 +32,41 @@ BoxLayout:
             orientation: 'horizontal'
 
             Slider:
-                id: row_slider
+                id: row
                 min: 1
                 max: 30
                 step: 1
 
             Label:
-                text: f'Rows: {row_slider.value}'
+                text: f'Rows: {row.value}'
 
             Slider:
-                id: col_slider
+                id: col
                 min: 1
                 max: 30
                 step: 1
 
             Label:
-                text: f'Columns: {col_slider.value}'
+                text: f'Columns: {col.value}'
 
             Button:
-                text: 'Resize'
-                on_release: app.board_widget.resize(row_slider.value, col_slider.value)
+                text: 'Resize Board'
+                on_release: app.board_widget.resize(row.value, col.value)
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Slider:
+                id: speed
+                min: 0.1
+                max: 100
+
+            Label:
+                text: f'{speed.value:.1f} fps'
+
+            Button:
+                text: 'Set Simulation Speed'
+                on_release: app.sim_speed = speed.value
 
         Button:
             text: 'Close Settings'
