@@ -72,7 +72,7 @@ class MainUI(App):
 
     def build(self):
         """Build the user interface."""
-        with open('./assets/ui/root_layout.kv', 'rt') as f:
+        with open('./assets/ui/ui_layout.kv', 'rt') as f:
             self.root =  Builder.load_string(f.read())
         self.board_widget = self.root.ids.board_widget
         return self.root
