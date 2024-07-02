@@ -70,6 +70,7 @@ class MainUI(App):
         self.root = None
         self.board_widget = None
         self.title = 'Game of Life'
+        self.icon = 'assets/images/icon.ico'
 
     def build(self):
         """Build the user interface."""
