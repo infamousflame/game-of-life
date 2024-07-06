@@ -4,6 +4,6 @@ __all__ = ['board', 'BOARD_SIZE']
 
 from simulate import Board
 
-BOARD_SIZE = (30, 30)
+BOARD_SIZE: tuple[int, int] = (30, 30)
 
 board: Board = Board(*BOARD_SIZE)
