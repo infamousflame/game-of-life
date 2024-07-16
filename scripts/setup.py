@@ -7,10 +7,13 @@ if 'VIRTUAL_ENV' not in environ:
     print('Please run this script within a virtual environment.')
     exit(1)
 
-module = Extension('simulate', sources = ['./src/modules/simulate/python_wrappers.c'])
+module = Extension(
+    name='simulate',
+    sources=['./src/modules/simulate/python_wrappers.c']
+)
 
 setup(
-    name = 'simulate',
-    description = "A simulation of Conway's game of life.",
-    ext_modules = [module]
+    name='simulate',
+    description="A simulation of Conway's game of life.",
+    ext_modules=[module]
 )
